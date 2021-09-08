@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('url.create');
 });
 
-Route::resource('/book', \App\Http\Controllers\BookController::class)->names('book');
+Route::resource('/url', \App\Http\Controllers\UrlController::class)->names('url');
+Route::get('/{url:url}', [\App\Http\Controllers\UrlController::class, 'show']);
