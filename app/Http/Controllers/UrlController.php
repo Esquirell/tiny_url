@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UrlStoreRequest;
+use App\Models\Url;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UrlController extends Controller
 {
@@ -13,7 +17,7 @@ class UrlController extends Controller
      */
     public function index()
     {
-        //
+        return view('url.index');
     }
 
     /**
@@ -23,7 +27,7 @@ class UrlController extends Controller
      */
     public function create()
     {
-        //
+        return view('url.create');
     }
 
     /**
@@ -32,20 +36,27 @@ class UrlController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UrlStoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $dateFormatted = Carbon::createFromTimestamp($data['lifetime'])->toDateTimeString();
+        $data['lifetime'] = $dateFormatted;
+        while(Url::where('url', $data['url'] = Str::random(5))->count());
+        Url::create($data);
+        return response()->json('ky');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Url $url
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Url $url)
     {
-        //
+        $url->transition += 1;
+        $url->save();
+        return redirect($url->redirect_url);
     }
 
     /**
@@ -80,5 +91,11 @@ class UrlController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAllUrls()
+    {
+        $urls = Url::all('url', 'redirect_url', 'lifetime', 'transition');
+        return response()->json($urls);
     }
 }
