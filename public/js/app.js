@@ -2142,7 +2142,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.redirect_url = '';
         _this.datetime = '';
       })["catch"](function (error) {
-        console.log(_this.messages);
         Swal.fire({
           icon: 'error',
           title: 'Ошибка',
@@ -2214,7 +2213,6 @@ __webpack_require__.r(__webpack_exports__);
         value: 'transition'
       }],
       items: [],
-      formattedDatetime: null,
       redirect_url: ''
     };
   },

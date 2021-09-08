@@ -42,7 +42,6 @@ export default {
             { text: 'Количество переходов', value: 'transition' },
         ],
         items: [],
-        formattedDatetime: null,
         redirect_url: '',
     }),
     mounted() {
@@ -60,7 +59,6 @@ export default {
                 });
         }
     }
-
 }
 </script>
 

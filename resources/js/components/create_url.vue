@@ -73,7 +73,6 @@ export default {
                     this.datetime = '';
                 })
                 .catch((error) => {
-                    console.log(this.messages)
                     Swal.fire({
                         icon: 'error',
                         title: 'Ошибка',
@@ -82,7 +81,6 @@ export default {
                 });
         }
     }
-
 }
 </script>
 
