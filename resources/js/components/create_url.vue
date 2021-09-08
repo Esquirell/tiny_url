@@ -15,6 +15,7 @@
                                     md="12"
                                 >
                                     <v-text-field
+                                        :error-messages="url_error"
                                         label="Введите ссылку"
                                         required
                                         v-model="redirect_url"
@@ -26,6 +27,8 @@
                                     md="12"
                                 >
                                     <v-datetime-picker
+                                        :textFieldProps="textFieldProps"
+                                        label="Время жизни"
                                         v-model="datetime"
                                     ></v-datetime-picker>
                                 </v-col>
@@ -60,6 +63,10 @@ export default {
     data: () => ({
         datetime: null,
         redirect_url: '',
+        textFieldProps: {
+            "error-messages": '',
+        },
+        url_error: [],
     }),
     methods: {
         submit() {
@@ -75,13 +82,14 @@ export default {
                     });
                     this.redirect_url = '';
                     this.datetime = '';
+                    this.textFieldProps["error-messages"] = '';
                 })
                 .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Ошибка',
-                        text: 'Проверьте правильность заполнения полей',
-                    })
+                    let errors = error.response.data.errors
+                    this.textFieldProps["error-messages"] = errors.lifetime
+                    this.url_error = errors.redirect_url
+                    console.log(errors)
+                    console.log(this.textFieldProps);
                 });
         }
     }

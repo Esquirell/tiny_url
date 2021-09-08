@@ -2122,11 +2122,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       datetime: null,
-      redirect_url: ''
+      redirect_url: '',
+      textFieldProps: {
+        "error-messages": ''
+      },
+      url_error: []
     };
   },
   methods: {
@@ -2145,12 +2152,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         _this.redirect_url = '';
         _this.datetime = '';
+        _this.textFieldProps["error-messages"] = '';
       })["catch"](function (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ошибка',
-          text: 'Проверьте правильность заполнения полей'
-        });
+        var errors = error.response.data.errors;
+        _this.textFieldProps["error-messages"] = errors.lifetime;
+        _this.url_error = errors.redirect_url;
+        console.log(errors);
+        console.log(_this.textFieldProps);
       });
     }
   }
@@ -47197,6 +47205,7 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     attrs: {
+                                      "error-messages": _vm.url_error,
                                       label: "Введите ссылку",
                                       required: ""
                                     },
@@ -47217,6 +47226,10 @@ var render = function() {
                                 { attrs: { cols: "12", sm: "12", md: "12" } },
                                 [
                                   _c("v-datetime-picker", {
+                                    attrs: {
+                                      textFieldProps: _vm.textFieldProps,
+                                      label: "Время жизни"
+                                    },
                                     model: {
                                       value: _vm.datetime,
                                       callback: function($$v) {
