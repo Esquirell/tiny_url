@@ -15,6 +15,10 @@ class CreateUrlsTable extends Migration
     {
         Schema::create('urls', function (Blueprint $table) {
             $table->id();
+            $table->string('url');
+            $table->string('redirect_url');
+            $table->timestamp('lifetime');
+            $table->integer('transition')->default(0);
             $table->timestamps();
         });
     }
