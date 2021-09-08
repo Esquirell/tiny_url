@@ -43,7 +43,7 @@ class UrlController extends Controller
         $data['lifetime'] = $dateFormatted;
         while(Url::where('url', $data['url'] = Str::random(5))->count());
         Url::create($data);
-        return response()->json('ky');
+        return response()->json(['message' => 'Ссылка успешно создана']);
     }
 
     /**

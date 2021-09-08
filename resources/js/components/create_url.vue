@@ -69,6 +69,10 @@ export default {
                 lifetime: date,
             })
                 .then(({data}) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: data.message
+                    });
                     this.redirect_url = '';
                     this.datetime = '';
                 })

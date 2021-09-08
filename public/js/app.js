@@ -2139,6 +2139,10 @@ __webpack_require__.r(__webpack_exports__);
         lifetime: date
       }).then(function (_ref) {
         var data = _ref.data;
+        Toast.fire({
+          icon: 'success',
+          title: data.message
+        });
         _this.redirect_url = '';
         _this.datetime = '';
       })["catch"](function (error) {
