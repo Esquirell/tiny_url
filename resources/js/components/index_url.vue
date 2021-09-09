@@ -20,7 +20,7 @@
                     <a
                         target="_blank"
                         :href="item.url">
-                        {{item.url}}
+                        127.0.0.1:8000/{{item.url}}
                     </a>
                 </template>
             </v-data-table>
@@ -53,9 +53,6 @@ export default {
                 .then(({data}) => {
                     console.log(data)
                     this.items = data
-                    for (let i = 0; i < this.items.length; i += 1) {
-                        this.items[i].url = 'http://127.0.0.1:8000/' + this.items[i].url;
-                    }
                 });
         }
     }

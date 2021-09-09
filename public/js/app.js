@@ -2140,7 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      var date = Date.parse(this.datetime) / 1000 + 10800;
+      var date = Date.parse(this.datetime) / 1000;
       axios.post('/url', {
         redirect_url: this.redirect_url,
         lifetime: date
@@ -2239,10 +2239,6 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         console.log(data);
         _this.items = data;
-
-        for (var i = 0; i < _this.items.length; i += 1) {
-          _this.items[i].url = 'http://127.0.0.1:8000/' + _this.items[i].url;
-        }
       });
     }
   }
@@ -47378,7 +47374,7 @@ var render = function() {
                   return [
                     _c("a", { attrs: { target: "_blank", href: item.url } }, [
                       _vm._v(
-                        "\n                    " +
+                        "\n                    127.0.0.1:8000/" +
                           _vm._s(item.url) +
                           "\n                "
                       )
