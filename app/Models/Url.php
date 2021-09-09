@@ -20,6 +20,6 @@ class Url extends Model
 
     public function prunable()
     {
-        return static::where('lifetime', '<=', Carbon::now()->addHours(3));
+        return static::where('lifetime', '<=', Carbon::now());
     }
 }

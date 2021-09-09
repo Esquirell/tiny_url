@@ -70,7 +70,7 @@ export default {
     }),
     methods: {
         submit() {
-            let date = (Date.parse(this.datetime))/1000 + 10800;
+            let date = (Date.parse(this.datetime))/1000;
             axios.post('/url', {
                 redirect_url: this.redirect_url,
                 lifetime: date,
